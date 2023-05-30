@@ -1,0 +1,104 @@
+body.body--light {
+  color: $grey-9;
+  background-color: rgba($primary, 0.07);
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('./../assets/background.png');
+    background-size: 220%;
+    opacity: 0.2;
+    z-index: -1;
+    content: '';
+  }
+  & .post-form {
+    & .q-placeholder {
+      &::placeholder {
+        color: $primary;
+        opacity: 0.8;
+      }
+    }
+    &_.q-field__native {
+      color: $grey-9;
+    }
+    & .q-field__label {
+      color: $primary;
+    }
+  }
+}
+
+body.body--dark {
+  background-color: $night;
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('./../assets/background.png');
+    background-size: 220%;
+    opacity: 0.1;
+    z-index: -1;
+    content: '';
+  }
+  & header.q-header,
+  & footer.q-footer {
+    background-color: $dark;
+  }
+  & .sidebar-left {
+    & .sidebar-header {
+      background-color: $dark;
+    }
+    & .exact-active {
+      color: $indigo-5;
+    }
+  }
+  & .post-form {
+    & .post-title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      & .q-icon {
+        color: #ffffff;
+      }
+    }
+    & .q-field__native {
+      color: #ffffff;
+    }
+  }
+  & .post-card {
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    & .q-avatar {
+      color: #ffffff;
+      background-color: $indigo-5;
+    }
+    & .post-restore {
+      color: #ffffff;
+    }
+  }
+  & .post-toolbar {
+    background-color: $dark;
+  }
+  & .post-dialog-card {
+    background-color: $night;
+  }
+  & .posts-filter {
+    & .q-router-link--active {
+      color: $indigo-5;
+      font-weight: bolder;
+    }
+  }
+  & .btn-add-post {
+    background-color: $indigo-5;
+  }
+
+  & .password-card {
+    & .password {
+      border-color: $indigo-5;
+    }
+  }
+}

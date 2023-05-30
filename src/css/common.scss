@@ -1,0 +1,55 @@
+$headerHeight: 50px;
+
+body {
+  position: relative;
+  font-size: 18px;
+  color: $grey-9;
+  background-color: #ffffff;
+}
+
+header {
+  height: $headerHeight;
+}
+
+.page-default {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  color: #ffffff;
+}
+
+.post-form {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - (#{$headerHeight} + 2rem));
+  color: $light-blue-9;
+  & .post-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  & .q-field {
+    font-size: 1em;
+    &__native {
+      color: $grey-9;
+    }
+    &__label {
+      padding-bottom: 1.5rem;
+      font-size: 1em;
+    }
+  }
+  & .q-field__native {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+}
+
+.btn-add-post {
+  position: fixed;
+  right: 1rem;
+  bottom: 75px;
+  width: 60px;
+  height: 60px;
+  background-color: $primary;
+  color: #ffffff;
+}

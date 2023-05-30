@@ -1,0 +1,41 @@
+// app global css in SCSS form
+
+.page-bg {
+  position: absolute;
+  top: calc(50% - 90px);
+  left: calc(50% - 90px);
+  font-size: 120px;
+  border-radius: 50%;
+  border: 5px solid $indigo-5;
+  padding: 25px;
+}
+
+.page-default {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  color: #ffffff;
+  background: linear-gradient(
+    186.93deg,
+    rgba(76, 92, 105, 0) 0%,
+    #010218 83.31%
+  );
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 1, 23, 0.85);
+    z-index: -1;
+    content: '';
+  }
+}
+
+.bg-default {
+  background-color: #1d1e32;
+}
+
+.q-field--dark .q-field__control:before {
+  border-color: white;
+}

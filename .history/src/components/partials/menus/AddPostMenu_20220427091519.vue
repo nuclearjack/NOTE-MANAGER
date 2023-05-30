@@ -1,0 +1,118 @@
+<template>
+  <div class="add-post-menu">
+    <q-btn
+      class="add-post-types"
+      icon="mdi-playlist-plus"
+      color="indigo-6"
+      size="lg"
+      round
+      v-click-outside="onHideAddPosts"
+      @click="showAddPosts = !showAddPosts"
+    />
+    <transition
+      v-show="showAddPosts"
+      enter-active-class="animated bounceInUp"
+      leave-active-class="animated bounceOutDown"
+      appear
+    >
+      <div class="add-post-btns flex column flex-center">
+        <q-btn
+          v-for="item in menu"
+          :key="item.type"
+          :color="item.color"
+          :icon="item.icon"
+          class="q-mb-md"
+          aria-label="Add"
+          width="40px"
+          height="40px"
+          round
+          @click="onDialogShow(item.type)"
+        />
+      </div>
+    </transition>
+  </div>
+  <DialogPostAdd :title="currentTitle || newPosts[currentType]">
+    <template #form>
+      <component :is="forms[currentType]" />
+    </template>
+  </DialogPostAdd>
+</template>
+
+<script lang="ts">
+import { defineComponent, ref, computed } from 'vue';
+import { AddPostMenu } from 'src/constants/menus/addPostMenu';
+import { NEW_POSTS } from 'src/constants';
+import { usePostsStore } from 'src/stores/posts';
+
+import DialogPostAdd from 'src/components/partials/dialogs/DialogPostAdd.vue';
+import FormAddLoginPost from 'src/components/partials/forms/FormAddLoginPost.vue';
+import FormAddNotePost from 'src/components/partials/forms/FormAddNotePost.vue';
+import FormAddCardPost from 'src/components/partials/forms/FormAddCardPost.vue';
+
+export const forms = {
+  login: FormAddLoginPost,
+  note: FormAddNotePost,
+  card: FormAddCardPost,
+};
+
+export default defineComponent({
+  name: 'AddPostMenu',
+  components: {
+    DialogPostAdd,
+  },
+  setup() {
+    const postsStore = usePostsStore();
+    const menu = ref(AddPostMenu);
+    const showAddPosts = ref(false);
+    const currentType = computed(() => postsStore.formType);
+    const currentTitle = computed(() => postsStore.postCurrent?.title);
+
+    const onDialogShow = (type: string) => {
+      postsStore.setFormType(type);
+      postsStore.openDialog();
+    };
+
+    const onHideAddPosts = () => {
+      showAddPosts.value = false;
+    };
+
+    return {
+      forms,
+      menu,
+      showAddPosts,
+      currentType,
+      currentTitle,
+      newPosts: NEW_POSTS,
+      onDialogShow,
+      onHideAddPosts,
+    };
+  },
+});
+</script>
+
+<style lang="scss" scoped>
+.add-post-menu {
+  position: fixed;
+  right: 30px;
+  bottom: 90px;
+  width: 60px;
+  min-height: 60px;
+  & .add-post-types {
+    position: absolute;
+    bottom: 0;
+    z-index: 99;
+  }
+  & .add-post-btns {
+    margin-bottom: 60px;
+    animation-duration: 0.5s;
+  }
+}
+</style>
+
+<style lang="scss">
+.t-post-form {
+  & .q-dialog__inner {
+    height: 100%;
+  }
+}
+</style>
